@@ -1,28 +1,24 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { lazy, Fragment, Suspense } from 'react';
+import { Router } from '@reach/router';
+import { Progress } from 'antd';
+import Main from './modules/common/Main';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+const Home = lazy(() => import('./modules/home'));
+const Detail = lazy(() => import('./modules/detail'));
+
+function App(){
+  return(
+      <Fragment>
+        <Suspense fallback={<Progress type="circle" />}>
+          <Main>
+            <Router>
+               <Home path="/"/>
+               <Detail path="detail/:id" />
+            </Router>
+          </Main>
+        </Suspense>
+      </Fragment>
+  )
 }
 
 export default App;
