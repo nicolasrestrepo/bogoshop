@@ -7,4 +7,4 @@ function Detail(){
         </React.Fragment>
     )
 }
-export default Detail
+export default Detail;

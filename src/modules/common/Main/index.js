@@ -10,7 +10,7 @@ function Main(props){
     return(
         <React.Fragment>
             <nav className={cx('navbar')}>
-                <h4>Bogoshop</h4>
+                <span>Bogoshop</span>
             </nav>
             <div className={cx('content-children')}>{children}</div>
         </React.Fragment>

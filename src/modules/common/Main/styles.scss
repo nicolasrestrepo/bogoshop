@@ -1,7 +1,14 @@
 .navbar{
     width: 100%;
     background-color: black;
-    h4{
+    height: 2em;
+    padding: .5em;
+    span{
         color: white;
+        font-weight: 900;
+        font-size: 1em;
     }
+}
+.content-children{
+    margin: 5em;
 }
