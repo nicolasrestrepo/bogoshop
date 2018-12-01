@@ -1,20 +1,23 @@
 import React from 'react';
 import classNames from 'classnames/bind';
+import Nav from '../Nav';
 
 import styles from './styles.scss'
 
 const cx = classNames.bind(styles)
 
+
 function Main(props){
     const { children } = props
-    return(
+
+    return( 
         <React.Fragment>
-            <nav className={cx('navbar')}>
-                <span>Bogoshop</span>
-            </nav>
+            <Nav/>
             <div className={cx('content-children')}>{children}</div>
         </React.Fragment>
     )
 
 }
+
+
 export default Main

@@ -3,18 +3,21 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "@reach/router";
 import classNames from "classnames/bind";
+import {useDispatch} from 'redux-react-hook';
 import { Row, Col, Card, Icon, Button, Dropdown, Menu } from "antd";
 import env from "../../env";
 import styles from "./styles.scss";
+import { addProduct } from '../../redux/actions';
 
 const cx = classNames.bind(styles);
 
 
 function menuSize(sizes){
     const [size, setSize] = useState(null);
+
     const menu = (
         <Menu >
-            {sizes.map(item => (<Menu.Item key={item} onClick={()=> setSize('M')}>M</Menu.Item>))}
+            {sizes.map(item => (<Menu.Item key={item} onClick={()=> setSize(item)}>{item}</Menu.Item>))}
         </Menu>
     )
     return { size, menu }
@@ -25,6 +28,7 @@ function Detail({ id }) {
     const [loading, setLoading] = useState(true);
     const [quantity, setQuantity] = useState(null);
     const { menu, size } = menuSize(product ? product.sizes : []);
+    const dispatch = useDispatch()
 
     const menuQuantity = (
         <Menu >
@@ -33,7 +37,6 @@ function Detail({ id }) {
         <Menu.Item key="3"onClick={()=> setQuantity(3)}>3</Menu.Item>
         </Menu>
     )
-
     // get product from api, sending like parameters the product.id
 	const useFetch = async () => {
 		try {
@@ -92,7 +95,12 @@ function Detail({ id }) {
                                         </div>
                                     </div>
 								</Card>
-								<Button className={cx("button-card")}>
+                                <Button onClick={() => dispatch(addProduct({
+                                    ...product,
+                                    size,
+                                    quantity,
+                                }))}
+                                    className={cx("button-card")}>
 									Agregar al carrito
 								</Button>
 							</Col>
@@ -103,4 +111,5 @@ function Detail({ id }) {
 		</React.Fragment>
 	);
 }
+
 export default Detail;
